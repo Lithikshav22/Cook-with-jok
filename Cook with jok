@@ -1,0 +1,32 @@
+import google.generativeai as genai
+
+# Configure the API with your key
+genai.configure(api_key="AIzaSyCoYzJU2VHpaOgBq0CoElAuy_MyRJIhVhw")
+
+# Initialize the model
+model = genai.GenerativeModel("gemini-1.5-flash")
+
+# System prompt to set the chatbot's persona
+system_prompt = "pretend as a girl friend"
+
+# Function to handle the conversation
+def chat_with_bot(user_input):
+    # Combine the system prompt and user input
+    prompt = system_prompt + user_input
+
+    # Generate the response from the model
+    response = model.generate_content(prompt)
+
+    # Return the response text
+    return response.text
+
+# Example of interaction with the chatbot
+if __name__ == "__main__":
+    print("Welcome to the chatbot. Ask me anything!")
+    while True:
+        user_input = input("You: ")
+        if user_input.lower() == "exit":
+            print("Goodbye!")
+            break
+        response = chat_with_bot(user_input)
+        print(f"Bot: {response}")
